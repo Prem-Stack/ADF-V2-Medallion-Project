@@ -80,7 +80,7 @@
 								},
 								"enableStaging": false,
 								"translator": {
-									"value": "@if(equals(item().name, 'DimPassenger.csv'),pipeline().parameters.p_passenger_mapping,if(equals(item().name, 'DimAirline.csv'),pipeline().parameters.p_airlines_mapping,\npipeline().parameters.p_flights_mapping))\n",
+									"value": "@if(equals(item().file_name, 'DimPassenger.csv'),pipeline().parameters.p_passenger_mapping,if(equals(item().file_name, 'DimAirline.csv'),pipeline().parameters.p_airline_mapping,\npipeline().parameters.p_flight_mapping))\n",
 									"type": "Expression"
 								}
 							},
@@ -201,7 +201,7 @@
 					}
 				}
 			},
-			"p_airlines_mapping": {
+			"p_airline_mapping": {
 				"type": "object",
 				"defaultValue": {
 					"type": "TabularTranslator",
@@ -250,7 +250,7 @@
 					}
 				}
 			},
-			"p_flights_mapping": {
+			"p_flight_mapping": {
 				"type": "object",
 				"defaultValue": {
 					"type": "TabularTranslator",
