@@ -1,24 +1,15 @@
 {
-	"name": "ds_onPrem_File",
+	"name": "ds_onPrem_Files_WOP",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_onPrem_FileServer",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"p_filename": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "FileServerLocation",
-				"fileName": {
-					"value": "@dataset().p_filename",
-					"type": "Expression"
-				}
+				"type": "FileServerLocation"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
