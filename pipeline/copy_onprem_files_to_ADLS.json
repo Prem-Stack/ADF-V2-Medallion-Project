@@ -1,5 +1,5 @@
 {
-	"name": "copy_onprem_files",
+	"name": "copy_onprem_files_to_ADLS",
 	"properties": {
 		"activities": [
 			{
