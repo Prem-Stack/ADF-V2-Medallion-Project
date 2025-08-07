@@ -3,11 +3,13 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Copy Sql data to Adls",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Lookup for InitialLoad Date in Adls",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -25,7 +27,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from dbo.filebookings where booking_date > '@{activity('Lookup1').output.firstRow}'",
+							"value": "select * from dbo.factbookings where booking_date > '@{activity('Lookup for InitialLoad Date in Adls').output.firstRow}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -60,7 +62,7 @@
 				}
 			},
 			{
-				"name": "Lookup1",
+				"name": "Lookup for InitialLoad Date in Adls",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -85,6 +87,34 @@
 					},
 					"dataset": {
 						"referenceName": "ds_Adls_Json",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Lookup for LatestLoad Date in Adls",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select max(booking_date) as LatestLoad from dbo.FlatBookings",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_AzureSqlTable",
 						"type": "DatasetReference"
 					}
 				}
