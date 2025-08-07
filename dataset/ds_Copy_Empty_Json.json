@@ -1,5 +1,5 @@
 {
-	"name": "ds_Adls_LastLoad_Json",
+	"name": "ds_Copy_Empty_Json",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_AzureDataLakeStorage",
@@ -10,18 +10,11 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "lastload.json",
-				"folderPath": "monitor/lastload",
+				"fileName": "empty.json",
+				"folderPath": "monitor/emptyjson",
 				"fileSystem": "bronze"
 			}
 		},
-		"schema": {
-			"type": "object",
-			"properties": {
-				"lastload": {
-					"type": "string"
-				}
-			}
-		}
+		"schema": {}
 	}
 }
