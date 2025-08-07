@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Execute Pipeline1",
+				"name": "Execute Copy OnPrem files to Adls",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"policy": {
@@ -37,7 +37,7 @@
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "Execute Pipeline1",
+						"activity": "Execute Copy OnPrem files to Adls",
 						"dependencyConditions": [
 							"Succeeded"
 						]
