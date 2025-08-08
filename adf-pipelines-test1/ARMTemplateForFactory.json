@@ -854,7 +854,7 @@
 							"headers": {},
 							"url": "https://prod-16.centralindia.logic.azure.com:443/workflows/56f6e1cce2f247e1917052d9dcdcf158/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=brrymum28JznU8VZss3BWir9n_Nd4WcvUMH_a6Eb61M",
 							"body": {
-								"value": "{\n    \"pipeline_name\": @{pipeline().Pipeline},\n    \"run_id\": @{pipeline().RunId},\n    \"status\": @{activity('Execute Copy Sql Tables to Adls').Status},\n    \"error\": @{activity('Execute Copy Sql Tables to Adls').error}\n}",
+								"value": "{\n    \"pipeline_name\": \"@{pipeline().Pipeline}\",\n    \"run_id\": \"@{pipeline().RunId}\",\n    \"status\": \"@{activity('Execute Copy Sql Tables to Adls').Status}\",\n    \"error\": \"@{activity('Execute Copy Sql Tables to Adls').error}\"\n}",
 								"type": "Expression"
 							}
 						}
@@ -1446,9 +1446,9 @@
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2025-08-08T09:09:00",
+						"frequency": "Minute",
+						"interval": 5,
+						"startTime": "2025-08-08T09:20:00",
 						"endTime": "2025-08-09T09:23:00",
 						"timeZone": "India Standard Time"
 					}
