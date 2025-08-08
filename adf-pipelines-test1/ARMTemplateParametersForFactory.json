@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-pipelines-test1"
+		},
+		"ls_AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"ls_AzureSqlDatabase_password": {
+			"value": ""
+		},
+		"ls_onPrem_FileServer_password": {
+			"value": ""
+		},
+		"ls_AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://datalakeadfmedallion.dfs.core.windows.net/"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_server": {
+			"value": "adfmedalliondbserver.database.windows.net"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_database": {
+			"value": "adfmedalliondb"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_userName": {
+			"value": "prem"
+		},
+		"ls_HttpServer_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com"
+		},
+		"ls_onPrem_FileServer_properties_typeProperties_host": {
+			"value": "C:\\SourceFiles"
+		},
+		"ls_onPrem_FileServer_properties_typeProperties_userId": {
+			"value": "janakiram"
+		}
+	}
+}
