@@ -10,6 +10,7 @@
 				"frequency": "Minute",
 				"interval": 5,
 				"startTime": "2025-08-08T13:45:00",
+				"endTime": "2025-08-09T08:34:12",
 				"timeZone": "India Standard Time"
 			}
 		}
