@@ -1,0 +1,21 @@
+{
+	"name": "ds_onPrem_Files_WOP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_onPrem_FileServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

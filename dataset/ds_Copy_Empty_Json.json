@@ -1,0 +1,20 @@
+{
+	"name": "ds_Copy_Empty_Json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "empty.json",
+				"folderPath": "monitor/emptyjson",
+				"fileSystem": "bronze"
+			}
+		},
+		"schema": {}
+	}
+}

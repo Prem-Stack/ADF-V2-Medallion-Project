@@ -1,0 +1,17 @@
+{
+	"name": "ls_onPrem_FileServer",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\SourceFiles",
+			"userId": "janakiram",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1ZmEzZjdjZi1mODI1LTQ5OTItOTEwYy1mMmM0Y2VlNGQ5ZjMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "Self-Hosted",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

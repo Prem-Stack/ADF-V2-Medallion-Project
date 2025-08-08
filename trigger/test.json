@@ -1,0 +1,25 @@
+{
+	"name": "test",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_End_to_End",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 5,
+				"startTime": "2025-08-08T08:23:00",
+				"endTime": "2025-08-09T09:23:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
