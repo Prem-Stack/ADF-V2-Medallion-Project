@@ -1,0 +1,55 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_silver_airline",
+						"type": "DatasetReference"
+					},
+					"name": "sourcedimairlines"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_silver_flight",
+						"type": "DatasetReference"
+					},
+					"name": "sourcedimflight"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_silver_passenger",
+						"type": "DatasetReference"
+					},
+					"name": "sourcedimpassenger"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_silver_Parquet",
+						"type": "DatasetReference"
+					},
+					"name": "sourceparquet"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourcedimairlines",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourcedimflight",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourcedimpassenger",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> sourceparquet"
+			]
+		}
+	}
+}
