@@ -84,7 +84,13 @@
 							"inputs": [
 								{
 									"referenceName": "ds_bronze",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"p_foldername": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
@@ -114,6 +120,16 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"dataset": {
+									"referenceName": "ds_bronze",
+									"type": "DatasetReference",
+									"parameters": {
+										"p_foldername": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								},
 								"logStorageSettings": {
 									"linkedServiceName": {
 										"referenceName": "ls_AzureDataLakeStorage",
