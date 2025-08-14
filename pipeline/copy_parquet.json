@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "ds_Parquet",
+						"referenceName": "ds_bronze_parquet",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -27,7 +27,7 @@
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
-						"type": "ParquetReadSettings"
+						"type": "BinaryReadSettings"
 					}
 				}
 			},
@@ -45,9 +45,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get Metadata').output.childItems",
+						"value": "@activity('Filter').output.value",
 						"type": "Expression"
 					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Copy data1",
@@ -63,19 +64,16 @@
 							"userProperties": [],
 							"typeProperties": {
 								"sink": {
-									"type": "ParquetSink",
+									"type": "BinarySink",
 									"storeSettings": {
 										"type": "AzureBlobFSWriteSettings"
-									},
-									"formatSettings": {
-										"type": "ParquetWriteSettings"
 									}
 								},
 								"enableStaging": false
 							},
 							"outputs": [
 								{
-									"referenceName": "ds_sql_Parquet",
+									"referenceName": "ds_sql_Binary",
 									"type": "DatasetReference"
 								}
 							]
@@ -100,12 +98,44 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "ls_AzureDataLakeStorage",
+										"type": "LinkedServiceReference"
+									},
+									"path": "bronze"
+								},
 								"enableLogging": true,
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": true,
 									"enablePartitionDiscovery": false
 								}
+							}
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "pipelineReturnValue",
+								"value": [
+									{
+										"key": "p_folderName",
+										"value": {
+											"type": "Expression",
+											"content": "@item().name"
+										}
+									}
+								],
+								"setSystemVariable": true
 							}
 						}
 					]
@@ -129,10 +159,76 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@and(\n  equals(item().type, 'Folder'),\n  and(\n    equals(length(item().name), 27), \n    and(\n      equals(substring(item().name, 4, 1), '-'),\n      and(\n        equals(substring(item().name, 7, 1), '-'),\n        and(\n          equals(substring(item().name, 10, 1), 'T'),\n          and(\n            equals(substring(item().name, 13, 1), ':'),\n            and(\n              equals(substring(item().name, 16, 1), ':'),\n              endswith(item().name, 'Z')\n            )\n          )\n        )\n      )\n    )\n  )\n)\n",
+						"value": "@and(\n  equals(item().type, 'Folder'),\n  and(\n    greaterOrEquals(length(item().name), 20),\n    and(\n      equals(substring(item().name, 4, 1), '-'),\n      and(\n        equals(substring(item().name, 7, 1), '-'),\n        and(\n          equals(substring(item().name, 10, 1), 'T'),\n          and(\n            equals(substring(item().name, 13, 1), ':'),\n            and(\n              equals(substring(item().name, 16, 1), ':'),\n              endswith(item().name, 'Z')\n            )\n          )\n        )\n      )\n    )\n  )\n)\n",
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Bronze",
+				"type": "DatabricksNotebook",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "ForEach",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "silver",
+				"type": "DatabricksNotebook",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Bronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "gold",
+				"type": "DatabricksNotebook",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "silver",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
 			}
 		],
 		"annotations": []
