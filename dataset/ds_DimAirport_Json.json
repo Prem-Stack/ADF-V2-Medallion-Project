@@ -1,0 +1,20 @@
+{
+	"name": "ds_DimAirport_Json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "DimAirline.json",
+				"folderPath": "JsonData",
+				"fileSystem": "bronze"
+			}
+		},
+		"schema": {}
+	}
+}
