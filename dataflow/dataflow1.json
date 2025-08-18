@@ -9,28 +9,28 @@
 						"referenceName": "ds_silver_airline",
 						"type": "DatasetReference"
 					},
-					"name": "sourcedimairlines"
+					"name": "sourceDimairlines"
 				},
 				{
 					"dataset": {
 						"referenceName": "ds_silver_flight",
 						"type": "DatasetReference"
 					},
-					"name": "sourcedimflight"
+					"name": "sourceDimflight"
 				},
 				{
 					"dataset": {
 						"referenceName": "ds_silver_passenger",
 						"type": "DatasetReference"
 					},
-					"name": "sourcedimpassenger"
+					"name": "sourceDimpassenger"
 				},
 				{
 					"dataset": {
 						"referenceName": "ds_silver_Parquet",
 						"type": "DatasetReference"
 					},
-					"name": "sourceparquet"
+					"name": "FactBookings"
 				}
 			],
 			"sinks": [],
@@ -38,17 +38,17 @@
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> sourcedimairlines",
+				"     ignoreNoFilesFound: false) ~> sourceDimairlines",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> sourcedimflight",
+				"     ignoreNoFilesFound: false) ~> sourceDimflight",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> sourcedimpassenger",
+				"     ignoreNoFilesFound: false) ~> sourceDimpassenger",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> sourceparquet"
+				"     format: 'parquet') ~> FactBookings"
 			]
 		}
 	}
