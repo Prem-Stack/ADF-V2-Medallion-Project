@@ -1,5 +1,5 @@
 {
-	"name": "dataflow_Trans",
+	"name": "silver_dataflow_trans",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -201,7 +201,7 @@
 				"          last_name = split(full_name, ' ')[2]) ~> derivedColumnFullname",
 				"derivedColumnFullname select(mapColumn(",
 				"          passenger_id,",
-				"          full_name,",
+				"          first_name,",
 				"          last_name,",
 				"          gender_flag,",
 				"          age,",
