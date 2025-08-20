@@ -1,0 +1,12 @@
+{
+	"name": "ds_onPrem_SqlServerTable_WP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_OnPrem_SqlServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}

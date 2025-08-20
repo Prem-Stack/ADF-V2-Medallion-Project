@@ -22,7 +22,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_onPrem_SqlServerTable",
+						"referenceName": "ds_onPrem_SqlServerTable_WP",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -65,12 +65,14 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "ParquetSink",
+									"type": "DelimitedTextSink",
 									"storeSettings": {
 										"type": "AzureBlobFSWriteSettings"
 									},
 									"formatSettings": {
-										"type": "ParquetWriteSettings"
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false,
@@ -86,12 +88,6 @@
 							"inputs": [
 								{
 									"referenceName": "ds_onPrem_SqlServerTable",
-									"type": "DatasetReference"
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "ds_Adventure_Parquet",
 									"type": "DatasetReference",
 									"parameters": {
 										"p_schemaName": {
@@ -103,6 +99,12 @@
 											"type": "Expression"
 										}
 									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_Adventure_DelimitedText",
+									"type": "DatasetReference"
 								}
 							]
 						}

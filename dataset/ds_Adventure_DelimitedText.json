@@ -1,0 +1,38 @@
+{
+	"name": "ds_Adventure_DelimitedText",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_schemaName": {
+				"type": "string"
+			},
+			"p_tableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().p_tableName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().p_schemaName",
+					"type": "Expression"
+				},
+				"fileSystem": "adventureworks"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
