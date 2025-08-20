@@ -1,9 +1,9 @@
 {
-	"name": "pipeline1",
+	"name": "pl_adventure_works",
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup1",
+				"name": "Lookup tables and schema",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -17,14 +17,96 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "",
+						"sqlReaderQuery": "select s.name as schemaName,\nt.name as tableName\nfrom sys.tables t\ninner join sys.schemas s on s.schema_id = t.schema_id\nwhere s.name = 'SalesLT'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
 						"referenceName": "ds_onPrem_SqlServerTable",
 						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup tables and schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup tables and schema').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_onPrem_SqlServerTable",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_Adventure_Parquet",
+									"type": "DatasetReference",
+									"parameters": {
+										"p_schemaName": {
+											"value": "@item().schemaName",
+											"type": "Expression"
+										},
+										"p_tableName": {
+											"value": "@item().tableName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
 				}
 			}
 		],
