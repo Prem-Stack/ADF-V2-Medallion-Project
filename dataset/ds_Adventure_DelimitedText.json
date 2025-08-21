@@ -23,7 +23,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@dataset().p_schemaName",
+					"value": "@concat(dataset().p_schemaName, '/', dataset().p_tableName)",
 					"type": "Expression"
 				},
 				"fileSystem": "adventureworks"
