@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_AzureSqlDatabase'"
 		},
+		"ls_OnPrem_SqlServer_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_OnPrem_SqlServer'"
+		},
 		"ls_onPrem_FileServer_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_onPrem_FileServer'"
@@ -38,6 +42,18 @@
 		"ls_HttpServer_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://raw.githubusercontent.com"
+		},
+		"ls_OnPrem_SqlServer_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-LSK9B8K6\\SQLEXPRESS"
+		},
+		"ls_OnPrem_SqlServer_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorksLT2022"
+		},
+		"ls_OnPrem_SqlServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "prem"
 		},
 		"ls_onPrem_FileServer_properties_typeProperties_host": {
 			"type": "string",
@@ -80,9 +96,6 @@
 					"ls_AzureSqlDatabase_password": {
 						"value": "[parameters('ls_AzureSqlDatabase_password')]"
 					},
-					"ls_onPrem_FileServer_password": {
-						"value": "[parameters('ls_onPrem_FileServer_password')]"
-					},
 					"ls_AzureDataLakeStorage_properties_typeProperties_url": {
 						"value": "[parameters('ls_AzureDataLakeStorage_properties_typeProperties_url')]"
 					},
@@ -97,12 +110,6 @@
 					},
 					"ls_HttpServer_properties_typeProperties_url": {
 						"value": "[parameters('ls_HttpServer_properties_typeProperties_url')]"
-					},
-					"ls_onPrem_FileServer_properties_typeProperties_host": {
-						"value": "[parameters('ls_onPrem_FileServer_properties_typeProperties_host')]"
-					},
-					"ls_onPrem_FileServer_properties_typeProperties_userId": {
-						"value": "[parameters('ls_onPrem_FileServer_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -121,6 +128,27 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"ls_OnPrem_SqlServer_password": {
+						"value": "[parameters('ls_OnPrem_SqlServer_password')]"
+					},
+					"ls_onPrem_FileServer_password": {
+						"value": "[parameters('ls_onPrem_FileServer_password')]"
+					},
+					"ls_OnPrem_SqlServer_properties_typeProperties_server": {
+						"value": "[parameters('ls_OnPrem_SqlServer_properties_typeProperties_server')]"
+					},
+					"ls_OnPrem_SqlServer_properties_typeProperties_database": {
+						"value": "[parameters('ls_OnPrem_SqlServer_properties_typeProperties_database')]"
+					},
+					"ls_OnPrem_SqlServer_properties_typeProperties_userName": {
+						"value": "[parameters('ls_OnPrem_SqlServer_properties_typeProperties_userName')]"
+					},
+					"ls_onPrem_FileServer_properties_typeProperties_host": {
+						"value": "[parameters('ls_onPrem_FileServer_properties_typeProperties_host')]"
+					},
+					"ls_onPrem_FileServer_properties_typeProperties_userId": {
+						"value": "[parameters('ls_onPrem_FileServer_properties_typeProperties_userId')]"
 					}
 				}
 			},

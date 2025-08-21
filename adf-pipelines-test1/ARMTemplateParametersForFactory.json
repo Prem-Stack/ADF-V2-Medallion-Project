@@ -11,6 +11,9 @@
 		"ls_AzureSqlDatabase_password": {
 			"value": ""
 		},
+		"ls_OnPrem_SqlServer_password": {
+			"value": ""
+		},
 		"ls_onPrem_FileServer_password": {
 			"value": ""
 		},
@@ -28,6 +31,15 @@
 		},
 		"ls_HttpServer_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com"
+		},
+		"ls_OnPrem_SqlServer_properties_typeProperties_server": {
+			"value": "LAPTOP-LSK9B8K6\\SQLEXPRESS"
+		},
+		"ls_OnPrem_SqlServer_properties_typeProperties_database": {
+			"value": "AdventureWorksLT2022"
+		},
+		"ls_OnPrem_SqlServer_properties_typeProperties_userName": {
+			"value": "prem"
 		},
 		"ls_onPrem_FileServer_properties_typeProperties_host": {
 			"value": "C:\\SourceFiles"
