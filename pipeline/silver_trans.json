@@ -16,15 +16,14 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow_Trans",
+						"referenceName": "silver_dataflow_trans",
 						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
 					},
-					"traceLevel": "Fine",
-					"runConcurrently": false
+					"traceLevel": "Fine"
 				}
 			}
 		],
